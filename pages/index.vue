@@ -10,6 +10,7 @@
       <button class="nav-view btn" @click="toggleView()">
         Show {{ view === 'ledger' ? 'budget' : 'ledger' }}
       </button>
+      <a class="btn" :href="downloadData()" target="_blank">v</a>
     </div>
 
     <div v-if="view === 'ledger'" class="ledger">
@@ -130,6 +131,11 @@ export default {
         R.values,
         R.sortBy(R.prop('name'))
       )(entries)
+    },
+    downloadData() {
+      return `data:application/octet-stream,${encodeURI(
+        JSON.stringify(this.periods)
+      )}`
     }
   }
 }

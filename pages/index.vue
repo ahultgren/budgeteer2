@@ -27,7 +27,7 @@
           class="budget-budget"
         />
       </div>
-      <div class="budget-total">{{ Math.sum(...currentCategories().map(x => x.amount) }}</div>
+      <div class="budget-total">{{ Math.sum(...currentCategories().map(x => x.amount)) }}</div>
     </div>
   </div>
 </template>

@@ -108,7 +108,7 @@ export default {
             const [, amount, currencyCode, name] = match
             const category = (obj[name] = obj[name] || {
               amount: 0,
-              budget: period.budget[name] || 0,
+              budget: Number(period.budget[name]) || 0,
               name
             })
             const currencyValue = currencyCode

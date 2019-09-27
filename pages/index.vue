@@ -167,7 +167,7 @@ button {
 
 .ledger {
   width: 100%;
-  height: calc(100vh - 53px);
+  height: calc(100vh - 53px - 150px);
 
   &-input {
     width: 100%;

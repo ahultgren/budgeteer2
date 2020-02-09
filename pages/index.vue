@@ -14,9 +14,13 @@
     </div>
 
     <div v-if="view === 'ledger'" class="ledger">
+      <div
+        class="ledger-input ledger-input--facade box"
+        v-html="linebreaktobr(periods[currentPeriod].ledger)"
+      ></div>
       <textarea
-        v-model.lazy="periods[currentPeriod].ledger"
-        class="ledger-input box"
+        v-model="periods[currentPeriod].ledger"
+        class="ledger-input ledger-input--textarea box"
       ></textarea>
     </div>
     <div v-if="view === 'budget'" class="budget box">
@@ -27,7 +31,20 @@
           class="budget-budget"
         />
       </div>
-      <div class="budget-total">Total: {{ currentCategories().map(x => x.amount).reduce((a, b) => a + b) }} / {{ currentCategories().map(x => x.budget).reduce((a, b) => a + b) }}</div>
+      <div class="budget-total">
+        Total:
+        {{
+          currentCategories()
+            .map((x) => x.amount)
+            .reduce((a, b) => a + b)
+        }}
+        /
+        {{
+          currentCategories()
+            .map((x) => x.budget)
+            .reduce((a, b) => a + b)
+        }}
+      </div>
     </div>
   </div>
 </template>
@@ -137,6 +154,9 @@ export default {
       return `data:application/octet-stream,${encodeURI(
         JSON.stringify(this.periods)
       )}`
+    },
+    linebreaktobr(text) {
+      return text.replace(/\n/g, '<br>') + '&nbsp;'
     }
   }
 }
@@ -167,11 +187,24 @@ button {
 
 .ledger {
   width: 100%;
-  height: calc(100vh - 53px - 150px);
+  position: relative;
 
   &-input {
     width: 100%;
-    height: 100%;
+    font-size: inherit;
+    font-family: inherit;
+    word-spacing: inherit;
+
+    &--facade {
+      height: auto;
+    }
+    &--textarea {
+      border: 0;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      opacity: 0;
+    }
   }
 }
 

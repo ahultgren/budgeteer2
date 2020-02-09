@@ -188,6 +188,7 @@ button {
 .ledger {
   width: 100%;
   position: relative;
+  padding-bottom: 300px;
 
   &-input {
     width: 100%;
@@ -203,7 +204,9 @@ button {
       height: 100%;
       position: absolute;
       top: 0;
-      opacity: 0;
+      background-color: transparent;
+      color: transparent;
+      caret-color: #000;
     }
   }
 }

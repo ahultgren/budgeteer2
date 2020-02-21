@@ -9,7 +9,7 @@
     >
       <span class="budgetlist-item-title">{{ title(period.ledger) }}</span>
       <span class="budgetlist-item-summary"
-        >{{ totalSpent() }} / {{ totalBudget() }}</span
+        >{{ totalSpent(period) }} / {{ totalBudget(period) }}</span
       >
     </nuxt-link>
   </div>
@@ -21,8 +21,14 @@ import { totalSpent, totalBudget } from './budget/_currentPeriod/scripts'
 export default {
   data() {
     return {
-      currentPeriod: 0,
-      periods: []
+      periods: [
+        {
+          ledger: 'September\n\n10 test',
+          budget: {
+            test: 20
+          }
+        }
+      ]
     }
   },
   mounted() {
@@ -32,10 +38,6 @@ export default {
       } catch (e) {
         console.error(e)
       }
-    }
-
-    if (Number(localStorage.currentPeriod)) {
-      this.currentPeriod = Number(localStorage.currentPeriod)
     }
   },
   methods: {

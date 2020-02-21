@@ -1,7 +1,6 @@
 import * as R from 'ramda'
 
-export function currentCategories(periods, currentPeriod) {
-  const period = periods[currentPeriod]
+export function currentCategories(period) {
   const ledger = period.ledger
   const entries = ledger.split(/\n/g).slice(1)
   const currencies = {
@@ -45,14 +44,14 @@ export function currentCategories(periods, currentPeriod) {
   )(entries)
 }
 
-export function totalSpent() {
-  return currentCategories(this.periods, this.currentPeriod)
+export function totalSpent(period) {
+  return currentCategories(period)
     .map((x) => x.amount)
     .reduce((a, b) => a + b)
 }
 
-export function totalBudget() {
-  return currentCategories(this.periods, this.currentPeriod)
+export function totalBudget(period) {
+  return currentCategories(period)
     .map((x) => x.budget)
     .reduce((a, b) => a + b)
 }

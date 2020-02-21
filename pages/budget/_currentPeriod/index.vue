@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div v-if="periods[currentPeriod]" class="container">
     <div class="nav box">
       <nuxt-link to="/">&lt; Budgets</nuxt-link>
       <button class="nav-add btn" @click="addLedger()">+</button>
@@ -29,9 +29,9 @@
       </div>
       <div class="budget-total">
         Total:
-        {{ totalSpent() }}
+        {{ totalSpent(periods[currentPeriod]) }}
         /
-        {{ totalBudget() }}
+        {{ totalBudget(periods[currentPeriod]) }}
       </div>
     </div>
   </div>
@@ -45,14 +45,7 @@ export default {
   data() {
     return {
       view: 'ledger',
-      periods: [
-        {
-          ledger: 'September\n\n10 test',
-          budget: {
-            test: 20
-          }
-        }
-      ],
+      periods: [],
       currentPeriod: this.$route.params.currentPeriod
     }
   },
@@ -88,7 +81,7 @@ export default {
       this.view = this.view === 'ledger' ? 'budget' : 'ledger'
     },
     currentCategories() {
-      return currentCategories(this.periods, this.currentPeriod)
+      return currentCategories(this.periods[this.currentPeriod])
     },
     totalSpent,
     totalBudget,

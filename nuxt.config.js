@@ -75,5 +75,8 @@ export default {
   },
   generate: {
     fallback: true
+  },
+  router: {
+    mode: 'hash'
   }
 }

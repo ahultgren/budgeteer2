@@ -20,18 +20,28 @@
       ></textarea>
     </div>
     <div v-if="view === 'budget'" class="budget box">
-      <div v-for="item in currentCategories()" :key="item.name">
-        {{ item.name }}: {{ item.amount }} /
+      <div
+        v-for="item in currentCategories()"
+        :key="item.name"
+        class="budget-category"
+      >
+        <span class="budget-name">{{ item.name }}</span>
+        <span class="budget-amount">{{ item.amount }}</span>
+        <span class="budget-divider">/</span>
         <input
           v-model="periods[currentPeriod].budget[item.name]"
           class="budget-budget"
         />
       </div>
       <div class="budget-total">
-        Total:
-        {{ totalSpent(periods[currentPeriod]) }}
-        /
-        {{ totalBudget(periods[currentPeriod]) }}
+        <span class="budget-name">Total:</span>
+        <span class="budget-amount">{{
+          totalSpent(periods[currentPeriod])
+        }}</span>
+        <span class="budget-divider">/</span>
+        <span class="budget-budget">{{
+          totalBudget(periods[currentPeriod])
+        }}</span>
       </div>
     </div>
   </div>
@@ -147,8 +157,34 @@ button {
 }
 
 .budget {
+  &-category,
+  &-total {
+    display: flex;
+  }
+
+  &-category {
+    margin-bottom: 10px;
+  }
+
+  &-total {
+    border-top: 1px solid #ccc;
+    margin-top: 17px;
+    padding-top: 11px;
+  }
+
+  &-amount {
+    margin-left: auto;
+  }
+
+  &-divider {
+    margin: 0 5px;
+  }
+
   &-budget {
     width: 50px;
+    padding: 0 0 1px 0;
+    border: 0;
+    border-bottom: 1px dashed #333;
   }
 }
 

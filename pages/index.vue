@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { totalSpent, totalBudget } from './budget/_currentPeriod/scripts'
+import { totalSpent, totalBudget } from '~/assets/scripts'
 
 export default {
   data() {

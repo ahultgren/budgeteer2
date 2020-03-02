@@ -3,56 +3,26 @@
     <div class="nav box">
       <nuxt-link class="btn" to="/">&lt; Budgets</nuxt-link>
       <button class="nav-view btn" @click="toggleView()">
-        Show {{ view === 'ledger' ? 'overview' : 'ledger' }}
+        Show {{ currentView === 'Ledger' ? 'overview' : 'ledger' }}
       </button>
     </div>
 
-    <div v-if="view === 'ledger'" class="ledger">
-      <div
-        class="ledger-input ledger-input--facade box"
-        v-html="linebreaktobr(periods[currentPeriod].ledger)"
-      ></div>
-      <textarea
-        v-model="periods[currentPeriod].ledger"
-        class="ledger-input ledger-input--textarea box"
-      ></textarea>
-    </div>
-    <div v-if="view === 'budget'" class="budget box">
-      <div
-        v-for="item in currentCategories()"
-        :key="item.name"
-        class="budget-category"
-      >
-        <span class="budget-name">{{ item.name }}</span>
-        <span class="budget-amount">{{ item.amount }}</span>
-        <span class="budget-divider">/</span>
-        <input
-          v-model="periods[currentPeriod].budget[item.name]"
-          class="budget-budget"
-        />
-      </div>
-      <div class="budget-total">
-        <span class="budget-name">Total:</span>
-        <span class="budget-amount">{{
-          totalSpent(periods[currentPeriod])
-        }}</span>
-        <span class="budget-divider">/</span>
-        <span class="budget-budget">{{
-          totalBudget(periods[currentPeriod])
-        }}</span>
-      </div>
-    </div>
+    <component :is="currentView" :period="periods[currentPeriod]"></component>
   </div>
 </template>
 
 <script>
-import { currentCategories, totalSpent, totalBudget } from './scripts'
+import Ledger from '~/components/ledger'
+import Overview from '~/components/overview'
 
 export default {
-  components: {},
+  components: {
+    Ledger,
+    Overview
+  },
   data() {
     return {
-      view: 'ledger',
+      currentView: 'Ledger',
       periods: [],
       currentPeriod: this.$route.params.currentPeriod
     }
@@ -79,15 +49,7 @@ export default {
   },
   methods: {
     toggleView() {
-      this.view = this.view === 'ledger' ? 'budget' : 'ledger'
-    },
-    currentCategories() {
-      return currentCategories(this.periods[this.currentPeriod])
-    },
-    totalSpent,
-    totalBudget,
-    linebreaktobr(text) {
-      return text.replace(/\n/g, '<br>') + '&nbsp;'
+      this.currentView = this.currentView === 'Ledger' ? 'Overview' : 'Ledger'
     }
   }
 }
@@ -113,64 +75,6 @@ button {
 
   &-view {
     float: right;
-  }
-}
-
-.ledger {
-  width: 100%;
-  position: relative;
-  padding-bottom: 300px;
-
-  &-input {
-    width: 100%;
-    font-size: inherit;
-    font-family: inherit;
-    word-spacing: inherit;
-
-    &--facade {
-      height: auto;
-    }
-    &--textarea {
-      border: 0;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      background-color: transparent;
-      color: transparent;
-      caret-color: #000;
-    }
-  }
-}
-
-.budget {
-  &-category,
-  &-total {
-    display: flex;
-  }
-
-  &-category {
-    margin-bottom: 10px;
-  }
-
-  &-total {
-    border-top: 1px solid #ccc;
-    margin-top: 17px;
-    padding-top: 11px;
-  }
-
-  &-amount {
-    margin-left: auto;
-  }
-
-  &-divider {
-    margin: 0 5px;
-  }
-
-  &-budget {
-    width: 50px;
-    padding: 0 0 1px 0;
-    border: 0;
-    border-bottom: 1px dashed #333;
   }
 }
 

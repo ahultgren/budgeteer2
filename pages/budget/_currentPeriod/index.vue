@@ -1,12 +1,10 @@
 <template>
   <div v-if="periods[currentPeriod]" class="container">
     <div class="nav box">
-      <nuxt-link to="/">&lt; Budgets</nuxt-link>
-      <button class="nav-add btn" @click="addLedger()">+</button>
+      <nuxt-link class="btn" to="/">&lt; Budgets</nuxt-link>
       <button class="nav-view btn" @click="toggleView()">
-        Show {{ view === 'ledger' ? 'budget' : 'ledger' }}
+        Show {{ view === 'ledger' ? 'overview' : 'ledger' }}
       </button>
-      <a class="btn" :href="downloadData()" target="_blank">v</a>
     </div>
 
     <div v-if="view === 'ledger'" class="ledger">
@@ -80,13 +78,6 @@ export default {
     }
   },
   methods: {
-    addLedger() {
-      this.periods.push({
-        ledger: 'New Ledger\n',
-        budget: {}
-      })
-      this.currentPeriod = this.periods.length - 1
-    },
     toggleView() {
       this.view = this.view === 'ledger' ? 'budget' : 'ledger'
     },
@@ -95,11 +86,6 @@ export default {
     },
     totalSpent,
     totalBudget,
-    downloadData() {
-      return `data:application/octet-stream,${encodeURI(
-        JSON.stringify(this.periods)
-      )}`
-    },
     linebreaktobr(text) {
       return text.replace(/\n/g, '<br>') + '&nbsp;'
     }
@@ -197,5 +183,9 @@ button {
   background: #fff;
   border: 1px solid #ddd;
   padding: 6px 12px;
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  font-family: inherit;
 }
 </style>

@@ -1,17 +1,23 @@
 <template>
-  <div class="budgetlist">
-    <nuxt-link
-      v-for="(period, index) in periods"
-      :key="index"
-      :to="'/budget/' + index"
-      class="budgetlist-item"
-      :value="index"
-    >
-      <span class="budgetlist-item-title">{{ title(period.ledger) }}</span>
-      <span class="budgetlist-item-summary"
-        >{{ totalSpent(period) }} / {{ totalBudget(period) }}</span
+  <div class="container">
+    <div class="nav box">
+      <button class="nav-add btn" @click="addLedger()">+</button>
+      <a class="btn" :href="downloadData()" target="_blank">Backup</a>
+    </div>
+    <div class="budgetlist">
+      <nuxt-link
+        v-for="(period, index) in periods"
+        :key="index"
+        :to="'/budget/' + index"
+        class="budgetlist-item"
+        :value="index"
       >
-    </nuxt-link>
+        <span class="budgetlist-item-title">{{ title(period.ledger) }}</span>
+        <span class="budgetlist-item-summary"
+          >{{ totalSpent(period) }} / {{ totalBudget(period) }}</span
+        >
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -45,7 +51,19 @@ export default {
       return ledger.split('\n')[0]
     },
     totalSpent,
-    totalBudget
+    totalBudget,
+    addLedger() {
+      this.periods.push({
+        ledger: 'New Ledger\n',
+        budget: {}
+      })
+      this.currentPeriod = this.periods.length - 1
+    },
+    downloadData() {
+      return `data:application/octet-stream,${encodeURI(
+        JSON.stringify(this.periods)
+      )}`
+    }
   }
 }
 </script>
@@ -55,7 +73,7 @@ export default {
   &-item {
     text-decoration: none;
     color: inherit;
-    margin: 0 20px;
+    margin: 0 10px;
     border-bottom: 1px solid #eee;
     display: block;
     padding: 12px 0;

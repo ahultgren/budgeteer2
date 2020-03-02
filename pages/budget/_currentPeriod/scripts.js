@@ -47,11 +47,11 @@ export function currentCategories(period) {
 export function totalSpent(period) {
   return currentCategories(period)
     .map((x) => x.amount)
-    .reduce((a, b) => a + b)
+    .reduce((a, b) => a + b, 0)
 }
 
 export function totalBudget(period) {
   return currentCategories(period)
     .map((x) => x.budget)
-    .reduce((a, b) => a + b)
+    .reduce((a, b) => a + b, 0)
 }

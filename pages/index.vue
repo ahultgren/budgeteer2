@@ -57,7 +57,9 @@ export default {
         ledger: 'New Ledger\n',
         budget: {}
       })
-      this.currentPeriod = this.periods.length - 1
+
+      // It's time to use a store
+      localStorage.periods = JSON.stringify(this.periods)
     },
     downloadData() {
       return `data:application/octet-stream,${encodeURI(

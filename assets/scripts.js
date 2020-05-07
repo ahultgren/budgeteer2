@@ -24,7 +24,7 @@ export function currentCategories(period) {
         const currencyValue = currencyCode
           ? currencies[currencyCode]
           : currentCurrencyValue
-        category.amount += Math.round(Number(amount) / currencyValue)
+        category.amount += Number(amount) / currencyValue
         return obj
       }
 

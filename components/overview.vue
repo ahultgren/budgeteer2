@@ -34,11 +34,6 @@
 import { currentCategories, totalSpent, totalBudget } from '~/assets/scripts'
 
 export default {
-  filters: {
-    round(val) {
-      return Math.round(val)
-    }
-  },
   props: ['period'],
   methods: {
     currentCategories() {

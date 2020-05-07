@@ -13,9 +13,10 @@
         :value="index"
       >
         <span class="budgetlist-item-title">{{ title(period.ledger) }}</span>
-        <span class="budgetlist-item-summary"
-          >{{ totalSpent(period) }} / {{ totalBudget(period) }}</span
-        >
+        <span class="budgetlist-item-summary">
+          {{ totalSpent(period) | round }} /
+          {{ totalBudget(period) | round }}
+        </span>
       </nuxt-link>
     </div>
   </div>

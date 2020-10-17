@@ -6,7 +6,7 @@
     </div>
     <div class="budgetlist">
       <nuxt-link
-        v-for="(period, index) in periods"
+        v-for="[period, index] in reversePeriods"
         :key="index"
         :to="'/budget/' + index"
         class="budgetlist-item"
@@ -36,6 +36,15 @@ export default {
           }
         }
       ]
+    }
+  },
+  computed: {
+    reversePeriods() {
+      return this.periods
+        .map((item, i) => {
+          return [item, i]
+        })
+        .reverse()
     }
   },
   mounted() {

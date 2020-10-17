@@ -43,6 +43,7 @@ export default {
       height: 100%;
       position: absolute;
       top: 0;
+      padding-left: 7px !important; // Works better in safari ios
       background-color: transparent;
       color: transparent;
       caret-color: #000;

@@ -85,6 +85,8 @@ export default {
 
 <style lang="less">
 .overview {
+  font-family: monospace;
+
   &-category,
   &-total {
     display: flex;

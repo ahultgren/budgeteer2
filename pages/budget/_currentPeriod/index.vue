@@ -62,7 +62,6 @@ export default {
 
 body {
   font-size: 16px;
-  font-family: monospace;
 }
 textarea,
 input,
@@ -71,7 +70,12 @@ button {
 }
 
 .nav {
-  height: 53px;
+  position: sticky;
+  background: rgba(245, 248, 255, 95%);
+  z-index: 1;
+  left: 0;
+  top: 0;
+  right: 0;
 
   &-view {
     float: right;
@@ -84,12 +88,13 @@ button {
 .btn {
   -moz-appearance: none;
   -webkit-appearance: none;
-  background: #fff;
-  border: 1px solid #ddd;
-  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  padding: 2px 0px;
   display: inline-block;
   text-decoration: none;
-  color: inherit;
+  color: #003eb4;
   font-family: inherit;
+  font-weight: 600;
 }
 </style>

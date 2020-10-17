@@ -2,7 +2,7 @@
   <div class="container">
     <div class="nav box">
       <button class="nav-add btn" @click="addLedger()">+</button>
-      <a class="btn" :href="downloadData()" target="_blank">Backup</a>
+      <a class="btn nav-view" :href="downloadData()" target="_blank">Backup</a>
     </div>
     <div class="budgetlist">
       <nuxt-link

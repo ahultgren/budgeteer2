@@ -24,6 +24,7 @@ export default {
 
 <style lang="less">
 .ledger {
+  font-family: monospace;
   width: 100%;
   position: relative;
   padding-bottom: 300px;

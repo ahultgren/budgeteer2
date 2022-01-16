@@ -1,5 +1,5 @@
 export default {
-  mode: 'static',
+  mode: 'spa',
   server: {
     port: process.env.PORT
   },

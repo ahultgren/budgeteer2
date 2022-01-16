@@ -19,6 +19,7 @@
         </span>
       </nuxt-link>
     </div>
+    <nuxt-link to="/migrate">Migrate data from old domain</nuxt-link>
   </div>
 </template>
 

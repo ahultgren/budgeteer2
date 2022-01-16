@@ -5,6 +5,7 @@ export default {
   },
   target: 'static',
   router: {
+    base: '/budgeteer2/',
     mode: 'hash'
   },
   /*
